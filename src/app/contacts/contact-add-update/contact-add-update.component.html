@@ -1,0 +1,69 @@
+<div class="contact-form-container">
+    <h2>{{ isAddOrUpdate }} Contact</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="contact-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstname" required>
+                @if (contactForm.get('firstname')?.hasError('required')) {
+                    <mat-error>
+                        First Name is required.
+                    </mat-error>
+                }
+                @if (contactForm.get('firstname')?.hasError('minlength')) {
+                    <mat-error>
+                        First Name must be at least 1 character long.
+                    </mat-error>
+                }
+                @if (contactForm.get('firstname')?.hasError('maxlength')) {
+                    <mat-error>
+                        First Name cannot exceed 20 characters.
+                    </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Surname</mat-label>
+                <input matInput formControlName="surname" required>
+                @if (contactForm.get('surname')?.hasError('required')) {
+                    <mat-error>
+                        Surname is required.
+                    </mat-error>
+                }
+                @if (contactForm.get('surname')?.hasError('minlength')) {
+                    <mat-error>
+                        Surname must be at least 1 character long.
+                    </mat-error>
+                }
+                @if (contactForm.get('surname')?.hasError('maxlength')) {
+                    <mat-error>
+                        Surname cannot exceed 20 characters.
+                    </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>
+                    @if (contactForm.get('dob')?.hasError('required')) {
+                        <span>Date of Birth is required.</span>
+                    }
+                    @if (contactForm.get('dob')?.hasError('invalidDate')) {
+                        <span>Date of Birth must be on or after January 1, 2000.</span>
+                    }
+                </mat-error>
+            </mat-form-field>
+
+
+            <div class="contact-form-actions">
+                <button mat-flat-button color="primary" [disabled]="!contactForm.valid" type="submit">
+                    {{ isAddOrUpdate }} Contact
+                </button>
+                <a mat-raised-button color="primary" [routerLink]="['/contact/list']">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

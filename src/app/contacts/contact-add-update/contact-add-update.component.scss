@@ -1,0 +1,18 @@
+.contact-form-container {
+  padding: 20px 40px;
+  .contact-fields {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    mat-form-field {
+        margin-bottom: 20px;
+    }
+
+    .contact-form-actions {
+        button, a {
+            width: 50%;
+        }
+    }
+  }
+}
